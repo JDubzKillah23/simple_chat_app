@@ -1,0 +1,138 @@
+/* style.css */
+body,
+html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #121212;
+    color: #eee;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.card {
+    background: #0f0f0f;
+    padding: 18px;
+    border-radius: 8px;
+    width: 360px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+}
+
+.card input {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #333;
+    background: #111;
+    color: #eee;
+}
+
+.app {
+    display: flex;
+    height: 100vh;
+}
+
+.left {
+    width: 280px;
+    background: #0b0b0b;
+    padding: 12px;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.6);
+    overflow-y: auto;
+}
+
+.main {
+    flex: 1;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.userItem {
+    padding: 8px;
+    background: #141414;
+    border-radius: 6px;
+    margin: 6px 0;
+    cursor: pointer;
+}
+
+.userItem strong {
+    display: block;
+}
+
+.messages {
+    flex: 1;
+    background: #070707;
+    padding: 12px;
+    border-radius: 8px;
+    overflow-y: auto;
+}
+
+.message {
+    background: #151515;
+    padding: 8px;
+    margin: 6px 0;
+    border-radius: 6px;
+    text-align: left;
+}
+
+.composer {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.composer input {
+    flex: 1;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #333;
+    background: #0f0f0f;
+    color: #eee;
+}
+
+.videoArea {
+    position: fixed;
+    right: 12px;
+    bottom: 12px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 8px;
+}
+
+video {
+    width: 260px;
+    height: 180px;
+    background: black;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+button {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 0;
+    background: #1e90ff;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+input::placeholder {
+    color: #888;
+}

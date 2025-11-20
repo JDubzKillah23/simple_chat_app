@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>SimpleChat (video)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="overlay" class="overlay">
+        <div class="card">
+            <h2>Welcome to SimpleChat</h2>
+            <p>Enter your display name — it will be shown to others.</p>
+            <input id="nameInput" placeholder="Your name">
+            <button id="registerBtn">Create my 9-digit ID</button>
+            <p id="myIdText"></p>
+        </div>
+    </div>
+
+    <div id="app" class="app" style="display:none;">
+        <aside class="left">
+            <h3>Your ID: <span id="meLabel"></span></h3>
+            <h4>People</h4>
+            <div id="usersList"></div>
+            <hr>
+            <input id="searchBox" placeholder="Search people...">
+        </aside>
+
+        <main class="main">
+            <h3 id="roomLabel">No chat open</h3>
+            <div id="messages" class="messages"></div>
+
+            <div class="composer">
+                <input id="messageInput" placeholder="Type a message...">
+                <button id="sendBtn">Send</button>
+                <button id="videoBtn">Video Call</button>
+            </div>
+
+            <div id="videoArea" class="videoArea" style="display:none;">
+                <video id="localVideo" autoplay muted></video>
+                <video id="remoteVideo" autoplay></video>
+                <div>
+                    <button id="endCallBtn">End Call</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="chat.js"></script>
+</body>
+
+</html>
