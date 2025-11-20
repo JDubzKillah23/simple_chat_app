@@ -35,23 +35,60 @@ function generateNumber() {
     return Math.floor(100000000 + Math.random() * 900000000).toString();
 }
 
-// Register a new user (name in body)
-app.post("/register", (req, res) => {
-    const name = (req.body.name || "Unknown").toString().substring(0, 100);
+// Create a new account and delete old account if exists
+app.post("/newAccount", (req, res) => {
+    const { oldNumber, name } = req.body;
+
+    if (!name) return res.status(400).json({ error: "Name is required" });
+
+    // Delete old account if oldNumber provided
+    if (oldNumber) {
+        db.run("DELETE FROM users WHERE number = ?", [oldNumber], (err) => {
+            if (err) console.error("Error deleting old account:", err);
+        });
+    }
+
+    // Generate a new random 9-digit number
     const number = generateNumber();
 
     db.run(
-        "INSERT INTO users (number, name, facetime) VALUES (?, ?, ?)",
-        [number, name, null],
+        "INSERT INTO users (number, name) VALUES (?, ?)",
+        [number, name],
         function (err) {
             if (err) {
-                console.error("register error:", err);
+                console.error("Error creating new account:", err);
                 return res.status(500).json({ error: true });
             }
             res.json({ number, name });
         }
     );
 });
+db.run(`CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    number TEXT UNIQUE,
+    name TEXT,
+    facetime TEXT
+)`);
+
+// Example JS function
+function createNewAccount() {
+    const name = prompt("Enter your name:");
+    const oldNumber = localStorage.getItem("myNumber"); // old account
+
+    fetch("/newAccount", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ oldNumber, name })
+    })
+        .then(res => res.json())
+        .then(data => {
+            localStorage.setItem("myNumber", data.number); // save new account
+            alert(`Your new account number is ${data.number}`);
+            // reload or update UI
+            location.reload();
+        });
+}
+
 
 // list all users (number + name + facetime)
 app.get("/users", (req, res) => {
